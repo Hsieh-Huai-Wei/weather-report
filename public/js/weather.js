@@ -1,8 +1,8 @@
 async function fetchData(url) {
   const res = await fetch(url, {
-    method: "GET",
+    method: 'GET',
     headers: new Headers({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     }),
   });
   return res.json();
@@ -11,9 +11,9 @@ async function fetchData(url) {
 async function getData(city) {
   const url = `/api/1.0/city/${city}`;
   const result = await fetchData(url);
-  $("#date").text(result.data[0].date);
-  $("#weather").text(result.data[0].description);
-  $("#temp").text(result.data[0].temp);
+  $('#date').text(result.data[0].date);
+  $('#weather').text(result.data[0].description);
+  $('#temp').text(result.data[0].temp);
 }
 
-getData("taipei");
+getData('taipei');

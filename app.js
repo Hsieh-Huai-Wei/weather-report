@@ -1,18 +1,23 @@
 // require packages used in the project
-const express = require("express");
+const express = require('express');
 const app = express();
 const port = 3000;
-const path = require("path");
-app.use(express.static(path.join(__dirname + "/public")));
+const path = require('path');
+const schedule = require('node-schedule');
+app.use(express.static(path.join(__dirname + '/public')));
+
+// crawel timer
+const crawel = require('./script/crawler');
+schedule.scheduleJob('0 0 * * * *', crawel.runCrawler);
 
 // connect mongoDB
-require("./server/models/config/dbcon.js");
+require('./server/models/config/dbcon.js');
 
 // view routes
-app.use("/", [require("./server/routers/weather_router")]);
+app.use('/', [require('./server/routers/weather_router')]);
 
 // API routes
-app.use("/api/1.0", [require("./server/api/weather_api")]);
+app.use('/api/1.0', [require('./server/api/weather_api')]);
 
 // start and listen on the Express server
 app.listen(port, () => {

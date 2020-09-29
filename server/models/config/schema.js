@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const NewsModelSchema = new mongoose.Schema({
   city: String,
@@ -8,9 +8,9 @@ const NewsModelSchema = new mongoose.Schema({
   description: String,
 });
 
-const TaiPeiModel = mongoose.model("taipei", NewsModelSchema);
-const NewTaipeiModel = mongoose.model("new_taipei", NewsModelSchema);
-const TaoYuanModel = mongoose.model("taoyuan", NewsModelSchema);
+const TaiPeiModel = mongoose.model('taipei', NewsModelSchema);
+const NewTaipeiModel = mongoose.model('new_taipei', NewsModelSchema);
+const TaoYuanModel = mongoose.model('taoyuan', NewsModelSchema);
 
 module.exports = {
   TaiPeiModel,

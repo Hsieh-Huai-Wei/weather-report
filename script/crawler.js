@@ -2,7 +2,7 @@ const weather = require("../server/models/weather_model");
 const got = require("got"); // fetch page in server
 
 // crawler data
-async function runDailyCrawler() {
+async function runCrawler() {
   const rowData = await got(
     "https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-8F8B2E47-8526-4FAA-B344-FC18493E22B3&format=JSON&stationId=466920,466880,467050&elementName=Weather,TEMP,TIME&parameterName=CITY"
   );
@@ -42,5 +42,5 @@ async function runDailyCrawler() {
 }
 
 module.exports = {
-  runDailyCrawler,
+  runCrawler,
 };
