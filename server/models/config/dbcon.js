@@ -1,7 +1,24 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-const url = 'mongodb://127.0.0.1:27017/news';
+const env = process.env.NODE_ENV || 'production';
 
-const connect = mongoose.connect(url, {
+const mongoConfig = {
+  production: {
+    // for EC2 machine
+    host: process.env.DB_CONNECTION,
+  },
+  development: {
+    // for localhost development
+    host: process.env.DB_CONNECTION_LOCAL,
+  },
+  test: {
+    // for automation testing (command: npm run test)
+    host: process.env.DB_CONNECTION_TEST,
+  },
+};
+
+
+const connect = mongoose.connect(mongoConfig[env].host, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -11,7 +28,7 @@ const connect = mongoose.connect(url, {
 const db = mongoose.connection;
 
 db.once('open', (_) => {
-  console.log('Database connected:', url);
+  console.log('Database connected:', mongoConfig[env].host);
 });
 
 db.on('error', (err) => {
